@@ -6,12 +6,15 @@ import gradient from 'gradient-string';
 import chalkAnimation from 'chalk-animation';
 import figlet from 'figlet';
 import { createSpinner } from 'nanospinner';
+// const fs = require('fs');
+import * as fs from 'fs';
 
 // console.log(chalk.bgGreen("Hello World!"));
 
 let playerName;
 
 const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
+
 
 async function welcome(){
     const rainbowTitle = chalkAnimation.rainbow(
@@ -51,12 +54,42 @@ async function guess() {
         type: 'input',
         message: 'What is your first guess?\n',
     });
-    
+    return answers;
 }
 
 
+const random = () => {
+    return Math.floor(Math.random() * newArr.length + 1);
+}
+
+
+
 // await welcome();
-
 // await askName();
+// await guess();
+let array = fs.readFileSync('./wordle.txt', 'utf-8');
+let newArr = array.split(',');
 
-await guess();
+// fs.readFile('./wordle.txt', 'utf-8', (err, data) => {
+//     if(err) throw err;
+
+//     // array = data.split(',');
+//     // console.log(array);
+
+//     return data.split(',');
+// });
+
+async function gameplay(guess){
+    for(let word of newArr){
+        if(guess === word){
+            console.log("You guess the word!" + guess);
+        } else{
+            console.log("Wrong guess try again");
+        }
+    }
+}
+
+
+
+console.log(random());
+// gameplay();
