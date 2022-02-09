@@ -49,12 +49,22 @@ async function askName() {
 }
 
 async function guess() {
-    const answers = await inquirer.prompt({
+
+    const answers =  await inquirer.prompt({
         name: 'guess',
         type: 'input',
         message: 'What is your first guess?\n',
     });
-    return answers;
+    // sleep();
+    
+    const guess = JSON.stringify(answers);
+    const word = guess.slice(10,15);
+
+    // console.log(word);
+    // console.log(typeof word);
+    gameplay(word);
+    
+    return word;
 }
 
 
@@ -79,17 +89,34 @@ let newArr = array.split(',');
 //     return data.split(',');
 // });
 
-async function gameplay(guess){
-    for(let word of newArr){
-        if(guess === word){
-            console.log("You guess the word!" + guess);
-        } else{
-            console.log("Wrong guess try again");
-        }
+ async function gameplay(guess){
+    console.log('This is where gameplay starts');
+    const ans = newArr[0];
+
+    // let word = JSON.stringify(guess);
+
+    // console.log(typeof word);
+
+    console.log('this is where a word was picked');
+
+    if(guess === ans){
+         console.log("Your right");
     }
+    
+    console.log(ans);
+    // for(let word of newArr){
+    //     if(guess === word){
+    //         console.log("You guess the word!" + guess);
+    //         break;
+    //     } else{
+    //         // console.log("Wrong guess try again");
+    //     }
+    // }
 }
 
 
 
-console.log(random());
+// console.log(random());
 // gameplay();
+
+guess();
